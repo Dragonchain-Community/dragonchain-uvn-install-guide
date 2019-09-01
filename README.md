@@ -1,3 +1,11 @@
+## Overview
+This repository hosts the step-by-step installation guides to launch an unmanaged Dragonchain verification node to begin earning $DRGN cryptocurrency for your participation in the Dragon Net blockchain network.
+
+## Step by Step Guide Quick Links
+-   [Launch a Ubuntu Server VPS on Linode](launch-a-vps-on-linode.md)
+-   [Installation Option #2: Manual Installation](manual-install.md)
+-   [Try the Dragonchain SDK](setup-dragonchain-sdk.md)
+
 ## Disclaimers
 -   You need basic linux admin skills (on the CLI) 
 -   This is not a production-ready workflow for a large scale kubernetes cluster. It works. That’s about all I’ll guarantee.    
