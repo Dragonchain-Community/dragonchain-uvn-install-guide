@@ -1,4 +1,4 @@
-# Step-by-Step Guide - Manual Installation - Server Setup
+# Manual Installation - Server Setup
 
 1. Make a required change in sysctl.conf
 
@@ -52,7 +52,7 @@
     ```sudo microk8s.enable registry ingress fluentd```
 
 
-# Step-by-Step Guide - Manual Installation - Dragonchain Installation
+# Manual Installation - Dragonchain Installation
 
 1. Create a setup directory (just for organization)
 
