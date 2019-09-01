@@ -7,9 +7,9 @@ This repository hosts the step-by-step installation guides to launch an unmanage
 -   [Try the Dragonchain SDK](setup-dragonchain-sdk.md)
 
 ## Disclaimers
--   You need basic linux admin skills (on the CLI) 
+-   Bbasic command-line linux admin skills are very handy but not required
 -   This is not a production-ready workflow for a large scale kubernetes cluster. It works. That’s about all I’ll guarantee.    
--   I can provide no PERSONAL guarantees on the security of this setup (especially if running on a local network with open ports).
+-   I can provide no guarantees on the security of this setup (especially if running on a local network with open ports).
 -   This process WILL change: make sure you're referencing the latest version of these documents when installing
 
 ## Recommendations
