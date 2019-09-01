@@ -58,7 +58,11 @@
 
     ```cd ~/ && mkdir setup && cd setup```
 
-2. Create chain secrets script
+2. Download the chain secrets template
+
+    ```wget http://dragonchain-community.github.io/dragonchain-uvn-install-guide/resources/chainsecrets.sh```
+
+3. Edit the chain secrets script
 
     ```nano chainsecrets.sh```
   
