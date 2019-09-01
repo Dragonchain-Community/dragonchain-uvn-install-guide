@@ -39,8 +39,8 @@ This repository hosts the step-by-step installation guides to launch an unmanage
 -   Dragonchain Github:
 	- [https://github.com/dragonchain/dragonchain](https://github.com/dragonchain/dragonchain)   
 
--   Dragonchain developers Slack:
-	- [https://forms.gle/ec7sACnfnpLCv6tXA](https://forms.gle/ec7sACnfnpLCv6tXA)
+-   Dragonchain Telegram:
+	- [https://t.me/dragontalk/](https://t.me/dragontalk/)
     
 -   Dragonchain Core Docs:
 	- [https://dragonchain-core-docs.dragonchain.com/latest/deployment/requirements.html](https://dragonchain-core-docs.dragonchain.com/latest/deployment/requirements.html)
