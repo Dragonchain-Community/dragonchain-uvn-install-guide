@@ -8,7 +8,7 @@
  
  4. Select a Region to deploy your VPS to
  
- 5. Select the "Linode 8GB" plan (2 CPU, 4GB RAM)
+ 5. Select the "Linode 8GB" plan (2 CPU, 8GB RAM)
     - You CAN choose the "Linode 4GB" plan, but you may have trouble; I highly recommend 8GB for the current release of Dragonchain
  
  6. Enter a "root password" 
