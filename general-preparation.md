@@ -10,9 +10,9 @@
 
 ## Recommended VPS/VM Server Specifications
 - 2 CPUs (or Cores)
-- 8GB RAM is HIGHLY recommended
-  - This WILL be lower in future Dragonchain Core releases
-  - 4GB of RAM CAN work, but you may encounter difficulties or poor performance
+- 4GB RAM SHOULD work fine, but 8GB is recommended if you can swing it
+  - It will DEFINITELY lower to 4GB recommended on the next Dragonchain release
+  - You may run into performance issues and even have trouble with install on 4GB VMs
 - 16GB Disk Space
 
 ## Security Considerations
