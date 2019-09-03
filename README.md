@@ -2,7 +2,7 @@
 This repository hosts the step-by-step installation guides to launch an unmanaged Dragonchain verification node to begin earning $DRGN cryptocurrency for your participation in the Dragon Net blockchain network.
 
 ## About the Course
-In this course on the Dragonchain Academy which guides you from zero knowledge to an operational Dragonchain Level 2 verification node running on a Ubuntu server (even if you've never heard the words "Linux" or "command line" before). 
+In this course on the Dragonchain Academy, you'll be guided from start to finish launching an operational Dragonchain Level 2 verification node running on a Ubuntu server (even if you've never heard the words "Linux" or "command line" before). 
 
 **In the course, you'll learn and be guided through:**
 - General preparation and registering on the Dragonchain console website
