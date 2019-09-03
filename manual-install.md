@@ -1,5 +1,7 @@
 # Manual Installation - Server Setup
 
+After connecting to your server with a program like Git Bash:
+
 1. Make a required change in sysctl.conf
 
 	```sudo nano /etc/sysctl.conf```
