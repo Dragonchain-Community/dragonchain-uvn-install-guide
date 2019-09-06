@@ -31,7 +31,7 @@ After connecting to your server with a program like Git Bash:
 
 6. Setup networking stuff (firewall rules)
 
-    ```sudo ufw default allow routed && sudo ufw default allow outgoing && sudo ufw allow 30000/tcp && sudo ufw allow in on cbr0 && sudo ufw allow out on cbr0```
+    ```sudo ufw --force enable && sudo ufw default allow routed && sudo ufw default allow outgoing && sudo ufw allow 22/tcp && sudo ufw allow 30000/tcp && sudo ufw allow in on cbr0 && sudo ufw allow out on cbr0```
 
 7. Enable microk8s modules
 
@@ -109,6 +109,7 @@ After connecting to your server with a program like Git Bash:
 	- Make the following changes in the opensource-config.yaml resource file:
 		1. Replace “ArbitraryName” with a real name (your choice)
 			- Recommend consistency and an all lowercase name (dashes are okay)
+			- DON'T include the letters "es" together in your name (don't ask)
 		2. Put your MATCHMAKING TOKEN in the quotes on the REGISTRATION_TOKEN line
 		3. Put your CHAIN ID in the quotes on the INTERNAL_ID line
 		4. Replace the address in DRAGONCHAIN_ENDPOINT with your address (domain name, IP address) and port that can be reached from the outside world
@@ -128,7 +129,7 @@ After connecting to your server with a program like Git Bash:
 
 10. Run the installation command:
 
-    *Replace **my-dragonchain** with a name you like (lowercase & dashes only; remember consistency...) in the following command if you wish*
+    *Replace **my-dragonchain** with a name you like (lowercase & dashes only; remember consistency...; and **DON'T** include the letters "es" in your name) in the following command if you wish*
 
     ```sudo helm upgrade --install my-dragonchain dragonchain-k8s-0.9.0.tgz --values opensource-config.yaml --namespace dragonchain```
 
