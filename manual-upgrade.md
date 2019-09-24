@@ -1,6 +1,6 @@
 # Manual Upgrade 
 
-This guide is for manually uprading a **running** Dragonchain node. After connecting to your server with a program like Git Bash:
+This guide is for manually upgrading a **running** Dragonchain node. After connecting to your server with a program like Git Bash:
 
 > Dragonchain Core Docs link for helm URLs:
 >
