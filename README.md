@@ -12,11 +12,16 @@ In this course on the Dragonchain Academy, you'll be guided from start to finish
 - The basics of using the Dragonchain SDK to write code to query your new node for information
 
 ## Step by Step Guide Quick Links
+#### For first time users and those installing a NEW Dragonchain Level 2 Node
 -   [General Preparation and Registering on Dragon Net](general-preparation.md)
 -   [Launch a Ubuntu Server VPS on Linode](launch-a-vps-on-linode.md)
 -   [Installation Option #1: Automatic Installation](automatic-install.md)
 -   [Installation Option #2: Manual Installation](manual-install.md)
 -   [Try the Dragonchain SDK](setup-dragonchain-sdk.md)
+
+#### If you need to UPGRADE an ALREADY RUNNING Dragonchain Level 2 Node
+- [Upgrade Option #1: Automatic Upgrade](automatic-upgrade.md)
+- [Upgrade Option #2: Manual Upgrade](manual-upgrade.md)
 
 ## Disclaimers
 -   Basic command-line linux admin skills are very handy but not required
