@@ -15,7 +15,7 @@
     
 3. Download the automatic installation script
 
-    ```wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-installer/release-v1.2-dragon-3.5.0/install_dragonchain_uvn.sh```
+    ```wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-installer/master/install_dragonchain_uvn.sh```
     
 4. Make the script "runnable"
 
