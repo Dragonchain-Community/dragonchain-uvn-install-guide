@@ -59,11 +59,11 @@ This guide is for manually uprading a **running** Dragonchain node. After connec
 		- If you see “error” or “crash” statuses, check with dev Slack or TG
 
 6. Get your PUBLIC chain ID and save for later (**if you don't already have it**)
-  - In the following command, replace <POD_NAME_HERE> with the full name of the pod that looks like “mychain-webserver-......” listed after running the previous status command:
+	- In the following command, replace <POD_NAME_HERE> with the full name of the pod that looks like “mychain-webserver-......” listed after running the previous status command:
 
     ```sudo kubectl exec -n dragonchain <POD_NAME_HERE> -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())"```
 
-- Save the string of characters that’s spit out
+	- Save the string of characters that’s spit out
 
 7. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
 
