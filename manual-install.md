@@ -117,9 +117,11 @@ After connecting to your server with a program like Git Bash:
 			- Example: http://yourdomainname.com:30000
 			- Example: http://12.34.56.78:3000 (replace 12.34.56.78 with your ip address)
 		5. Change LEVEL to “2”
-		6. In the **dragonchain:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-		7. In the **es:** section, change “storageClass: standard” to “storageClass: microk8s-hostpath”
-		8. In the **redis:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
+		6. In the **dragonchain:** section:
+			- Change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
+			- Change "version: latest" to "version: 4.0.0" (or whatever the latest version of DC is)
+		7. In the **redis:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
+		8. In the **redisearch:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
 		9. CTRL + O to save, then Enter to confirm
 		10. CTRL + X to exit
 
@@ -131,7 +133,7 @@ After connecting to your server with a program like Git Bash:
 
     *Replace **my-dragonchain** with a name you like (lowercase & dashes only; remember consistency...; and **DON'T** include the letters "es" in your name) in the following command if you wish*
 
-    ```sudo helm upgrade --install my-dragonchain dragonchain-k8s-0.9.0.tgz --values opensource-config.yaml --namespace dragonchain```
+    ```sudo helm upgrade --install my-dragonchain dragonchain-k8s-1.0.0.tgz --values opensource-config.yaml --namespace dragonchain```
 
 12. Check the status of the pod installations
 
