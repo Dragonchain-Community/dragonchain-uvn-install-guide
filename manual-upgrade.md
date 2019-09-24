@@ -3,6 +3,7 @@
 This guide is for manually upgrading a **running** Dragonchain node. After connecting to your server with a program like Git Bash:
 
 1. Create a new clean setup directory for the manual upgrade:
+
 	```mkdir upgrade-4.0 && cd upgrade-4.0```
 
 > Dragonchain Core Docs link for helm URLs:
