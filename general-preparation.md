@@ -38,10 +38,12 @@ Log in, and find (possibly under "Advanced" tab) the page for "Port Forwarding",
 
 One final note if you setup port forwarding to a device on your network: your device's INTERNAL IP address may change if you restart the device, the router is restarted, etc. You can set your device up to use a permanent internal IP address. 
 
-**Windows Guide for Setting a Static Internal IP Address**
+**Windows Guide for Setting a Static Internal IP Address:**
+
 https://kb.netgear.com/27476/How-do-I-set-a-static-IP-address-in-Windows
 
-**Linux Guide for Setting a Static Internal IP Address**
+**Linux Guide for Setting a Static Internal IP Address:**
+
 https://danielmiessler.com/study/manually-set-ip-linux/
 
 If you have any questions or trouble, let us know in the Telegram chats.
