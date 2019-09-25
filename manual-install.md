@@ -115,7 +115,7 @@ After connecting to your server with a program like Git Bash:
 		4. Replace the address in DRAGONCHAIN_ENDPOINT with your address (domain name, IP address) and port that can be reached from the outside world
 			- **Don’t forget the http:// here!**
 			- Example: http://yourdomainname.com:30000
-			- Example: http://12.34.56.78:3000 (replace 12.34.56.78 with your ip address)
+			- Example: http://12.34.56.78:30000 (replace 12.34.56.78 with your ip address)
 		5. Change LEVEL to “2”
 		6. In the **dragonchain:** section:
 			- Change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
