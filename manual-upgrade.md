@@ -52,9 +52,7 @@ This guide is for manually upgrading a **running** Dragonchain node. After conne
 
 6. Run the installation command:
 
-    Replace **my-dragonchain** with the **name you used when originally installing dragonchain** in the following command. 
-    
-    **If you no longer remember the name you used, you can run `sudo helm list` to find the name.**
+    Replace **my-dragonchain** with the **name you listed when running the `sudo helm list` command** in the following. 
 
     ```sudo helm upgrade --install my-dragonchain dragonchain-k8s-1.0.0.tgz --values opensource-config.yaml --namespace dragonchain```
 
