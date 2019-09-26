@@ -2,7 +2,11 @@
 
 This guide is for manually upgrading a **running** Dragonchain node. After connecting to your server with a program like Git Bash:
 
-1. Create a new clean setup directory for the manual upgrade:
+1. Force microk8s back to the correct version: 
+
+	```sudo snap refresh microk8s --channel=1.15/stable --classic``` 
+
+2. Create a new clean setup directory for the manual upgrade:
 
 	```mkdir upgrade-4.0 && cd upgrade-4.0```
 
@@ -11,15 +15,15 @@ This guide is for manually upgrading a **running** Dragonchain node. After conne
 > https://dragonchain-core-docs.dragonchain.com/latest/deployment/links.html
 
 
-2. Download latest helm chart
+3. Download latest helm chart
 
     ```wget http://replace-with-latest-helm-CHART-link-from-docs-above```
 
-3. Download latest helm config
+4. Download latest helm config
 
     ```wget http://replace-with-latest-helm-VALUES-link-from-docs```
 
-4. Edit the config file:
+5. Edit the config file:
 
     ```nano opensource-config.yaml```
     
@@ -46,7 +50,7 @@ This guide is for manually upgrading a **running** Dragonchain node. After conne
 #### Let’s upgrade dragonchain!
 
 
-5. Run the installation command:
+6. Run the installation command:
 
     Replace **my-dragonchain** with the **name you used when originally installing dragonchain** in the following command. 
     
@@ -54,7 +58,7 @@ This guide is for manually upgrading a **running** Dragonchain node. After conne
 
     ```sudo helm upgrade --install my-dragonchain dragonchain-k8s-1.0.0.tgz --values opensource-config.yaml --namespace dragonchain```
 
-6. Check the status of the pod installations
+7. Check the status of the pod installations
 
     ```sudo kubectl get pods -n dragonchain```
     
@@ -62,14 +66,14 @@ This guide is for manually upgrading a **running** Dragonchain node. After conne
 		- This step may take several minutes (up to 30 minutes or more) depending on your server; be patient and keep checking with that command!
 		- If you see “error” or “crash” statuses, check with dev Slack or TG
 
-7. Get your PUBLIC chain ID and save for later (**if you don't already have it**)
+8. Get your PUBLIC chain ID and save for later (**if you don't already have it**)
 	- In the following command, replace <POD_NAME_HERE> with the full name of the pod that looks like “mychain-webserver-......” listed after running the previous status command:
 
     ```sudo kubectl exec -n dragonchain <POD_NAME_HERE> -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())"```
 
 	- Save the string of characters that’s spit out
 
-8. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
+9. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
 
     ```curl https://matchmaking.api.dragonchain.com/registration/verify/CHAIN_PUBLIC_ID```
     
