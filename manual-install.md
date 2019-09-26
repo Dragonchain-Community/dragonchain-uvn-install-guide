@@ -21,7 +21,7 @@ After connecting to your server with a program like Git Bash:
 
 4. Install microk8s
 
-    ```sudo snap install microk8s --classic```
+    ```sudo snap install microk8s --channel=1.15/stable --classic```
 
 5. Alias the kubectl command (if you don’t have normal kubectl installed)
     - If you DO have kubectl already installed (shouldn’t if this is a clean Ubuntu installation), you’ll need to prefix ANY kubectl commands below with “microk8s”, so “microk8s.kubectl get pods -n dragonchain” for example. This should only matter if you already know what you’re doing.
