@@ -38,13 +38,14 @@ This guide is for manually upgrading a **running** Dragonchain node. After conne
 			- Example: http://yourdomainname.com:30000
 			- Example: http://12.34.56.78:30000 (replace 12.34.56.78 with your ip address)
 		5. Change LEVEL to “2”
-		6. In the **dragonchain:** section:
+		6. In the **service:** section, change "port: 30000" to the correct port number (if different)
+		7. In the **dragonchain:** section:
 			- Change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
 			- Change "version: latest" to "version: 4.0.0" (or whatever the latest version of DC is)
-		7. In the **redis:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-		8. In the **redisearch:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-		9. CTRL + O to save, then Enter to confirm
-		10. CTRL + X to exit
+		8. In the **redis:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
+		9. In the **redisearch:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
+		10. CTRL + O to save, then Enter to confirm
+		11. CTRL + X to exit
 
 
 #### Let’s upgrade dragonchain!
