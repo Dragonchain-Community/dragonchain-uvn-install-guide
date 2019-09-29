@@ -15,7 +15,7 @@
     
 3. Download the automatic installation script
 
-    ```wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-installer/hotfix-v1.3.1-dragon-4.0.0/install_dragonchain_uvn.sh```
+    ```wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-installer/release-v1.4-dragon-4.0.0/install_dragonchain_uvn.sh```
     
 4. Make the script "runnable"
 
