@@ -10,8 +10,8 @@
     - The port number to use on your server
       - Unless you KNOW you need a different port, just use 30000 here
   
-2. Connect to your VPS or VM
-    - If following the Linode tutorial, use the "ssh root@..." command you saved
+2. Connect to your VPS or VM using Git Bash or your terminal
+    - If following the Linode tutorial, copy and paste the "ssh root@..." command you saved from the Networking tab
     
 3. Download the automatic installation script (copy and paste the following command into Git Bash or your terminal)
 
