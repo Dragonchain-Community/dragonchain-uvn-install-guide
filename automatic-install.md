@@ -21,6 +21,8 @@
 
     ```chmod u+x ./install_dragonchain_uvn.sh```
 
+    *Note: This command will not output anything to the screen if it worked.*
+
 5. Run the installation script (copy and paste the following command into Git Bash or your terminal)
 
     ``` sudo ./install_dragonchain_uvn.sh```
