@@ -51,7 +51,7 @@ After connecting to your server with a program like Git Bash:
 
 10. Install the last microk8s modules
 
-    ```sudo microk8s.enable registry fluentd```
+    ```sudo microk8s.enable registry```
 
 
 # Manual Installation - Dragonchain Installation
