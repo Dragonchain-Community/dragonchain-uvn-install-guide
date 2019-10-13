@@ -13,15 +13,15 @@
 2. Connect to your VPS or VM
     - If following the Linode tutorial, use the "ssh root@..." command you saved
     
-3. Download the automatic installation script
+3. Download the automatic installation script (copy and paste the following command into Git Bash or your terminal)
 
     ```wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-installer/release-v1.5-dragon-4.0.0/install_dragonchain_uvn.sh```
     
-4. Make the script "runnable"
+4. Make the script "runnable" (copy and paste the following command into Git Bash or your terminal)
 
     ```chmod u+x ./install_dragonchain_uvn.sh```
 
-5. Run the installation script
+5. Run the installation script (copy and paste the following command into Git Bash or your terminal)
 
     ``` sudo ./install_dragonchain_uvn.sh```
     
