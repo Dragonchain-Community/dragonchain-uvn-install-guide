@@ -9,10 +9,7 @@
 5. Click the Matchmaking tab at the top to retrieve your Chain ID and Matchmaking Token 
 
 ## Recommended VPS/VM Server Specifications
-- 2 CPUs (or Cores)
-- 4GB RAM SHOULD work fine, but 8GB is recommended if you can swing it
-  - It will DEFINITELY lower to 4GB recommended on the next Dragonchain release
-  - You may run into performance issues and even have trouble with install on 4GB VMs
+- 1 CPU and 2GB RAM is now working well with the latest Dragonchain release!
 - 16GB Disk Space
 
 ## Security Considerations
