@@ -25,6 +25,8 @@ Off we go:
         ```wget http://dragonchain-community.github.io/dragonchain-uvn-install-guide/resources/credentials```
     
   - Make edits, then CTRL+O to save, CTRL+X to exit
+    - Note that your endpoint URL should be the FULL url and port that you used when installing your node
+    - Example for Linode users: http://12.34.56.78:30000 (replacing 12.34.56.78 with your actual IP)
     
 3. Install the dragonchain sdk:
 
