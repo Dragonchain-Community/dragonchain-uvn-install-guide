@@ -39,7 +39,7 @@ After connecting to your server with a program like Git Bash:
 
 8. Install helm
 
-    ```curl -LO https://git.io/get_helm.sh && bash get_helm.sh --version v2.14.3 && rm get_helm.sh```
+    ```sudo curl -LO https://git.io/get_helm.sh && sudo bash get_helm.sh --version v2.14.3 && sudo rm get_helm.sh```
 
 9. Init helm
 
