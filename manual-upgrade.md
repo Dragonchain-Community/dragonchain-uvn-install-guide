@@ -2,7 +2,7 @@
 
 This guide is for manually upgrading a **running** Dragonchain node. After connecting to your server with a program like Git Bash:
 
-*Note: this guide assumes you followed the updated manual installation process to begin with. If you do not currently have a file named "install_dragonchain.sh" in your setup folder, please follow Step 8 under ["Manual Installation"](https://github.com/Dragonchain-Community/dragonchain-uvn-install-guide/blob/master/manual-install.md#manual-installation---dragonchain-installation) then continue here.
+*Note: this guide assumes you followed the updated manual installation process to begin with. If you do not currently have a file named "install_dragonchain.sh" in your setup folder, please follow Step 8 under ["Manual Installation"](https://github.com/Dragonchain-Community/dragonchain-uvn-install-guide/blob/master/manual-install.md#manual-installation---dragonchain-installation) then continue here.*
 
 1. Change to the setup directory
 
