@@ -90,7 +90,7 @@ After connecting to your server with a program like Git Bash:
 
 7. Add the dragonchain repo to helm:
 
-   ```helm repo add dragonchain https://dragonchain-charts.s3.amazonaws.com && helm repo update```
+   ```sudo helm repo add dragonchain https://dragonchain-charts.s3.amazonaws.com && sudo helm repo update```
 
 8. Create a new script called "install_dragonchain.sh":
    
