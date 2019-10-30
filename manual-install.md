@@ -126,7 +126,7 @@ sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain d
 --set redisearch.storage.spec.storageClassName="microk8s-hostpath""
 ```
 
-   then make the following changes:
+then make the following changes:
 
    1. Replace DRAGONCHAIN_HELM_CHART_VERSION with the latest chart version (NOT Dragonchain version)	
    2. Replace “mydragonchain” with a real name (your choice)
@@ -140,12 +140,11 @@ sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain d
    6. CTRL + O to save, then Enter to confirm
    7. CTRL + X to exit
 
+#### Let’s install dragonchain!
+
 9. Make the install script executable:
 
    ```chmod u+x ./install_dragonchain.sh```
-
-#### Let’s install dragonchain!
-
 
 10. Run the installation command:    
 
