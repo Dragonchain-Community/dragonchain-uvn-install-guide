@@ -123,7 +123,7 @@ sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain d
 --set service.port=$DRAGONCHAIN_UVN_NODE_PORT \
 --set dragonchain.storage.spec.storageClassName="microk8s-hostpath" \
 --set redis.storage.spec.storageClassName="microk8s-hostpath" \
---set redisearch.storage.spec.storageClassName="microk8s-hostpath""
+--set redisearch.storage.spec.storageClassName="microk8s-hostpath"
 ```
 
 then make the following changes:
