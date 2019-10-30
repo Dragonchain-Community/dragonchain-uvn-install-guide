@@ -98,46 +98,47 @@ After connecting to your server with a program like Git Bash:
 
    then copy/paste the following:
 
-   ```
-   # Arbitrary name for your node (recommend all lowercase letters/numbers/dashes, NO spaces)
-   DRAGONCHAIN_UVN_NODE_NAME="mydragonchain"
+```
+# Arbitrary name for your node (recommend all lowercase letters/numbers/dashes, NO spaces)
+DRAGONCHAIN_UVN_NODE_NAME="mydragonchain"
 
-   # Your Matchmaking Token from the Dragonchain Console Website
-   DRAGONCHAIN_UVN_REGISTRATION_TOKEN="YOURMATCHMAKINGTOKENFROMCONSOLE"
+# Your Matchmaking Token from the Dragonchain Console Website
+DRAGONCHAIN_UVN_REGISTRATION_TOKEN="YOURMATCHMAKINGTOKENFROMCONSOLE"
 
-   # Your Chain ID from the Dragonchain Console Website
-   DRAGONCHAIN_UVN_INTERNAL_ID="YOURCHAINIDFROMCONSOLE"
+# Your Chain ID from the Dragonchain Console Website
+DRAGONCHAIN_UVN_INTERNAL_ID="YOURCHAINIDFROMCONSOLE"
 
-   # Your Endpoint URL including http:// (or https:// if you know SSL has been configured)
-   DRAGONCHAIN_UVN_ENDPOINT_URL="YOUR ENDPOINT URL"
+# Your Endpoint URL including http:// (or https:// if you know SSL has been configured)
+DRAGONCHAIN_UVN_ENDPOINT_URL="YOUR ENDPOINT URL"
 
-   # The port to install on (30000 is default; only change if you know what you're doing)
-   DRAGONCHAIN_UVN_NODE_PORT="30000"
+# The port to install on (30000 is default; only change if you know what you're doing)
+DRAGONCHAIN_UVN_NODE_PORT="30000"
 
-   sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain dragonchain/dragonchain-k8s \
-   --set global.environment.DRAGONCHAIN_NAME="$DRAGONCHAIN_UVN_NODE_NAME" \
-   --set global.environment.REGISTRATION_TOKEN="$DRAGONCHAIN_UVN_REGISTRATION_TOKEN" \
-   --set global.environment.INTERNAL_ID="$DRAGONCHAIN_UVN_INTERNAL_ID" \
-   --set global.environment.DRAGONCHAIN_ENDPOINT="$DRAGONCHAIN_UVN_ENDPOINT_URL:$DRAGONCHAIN_UVN_NODE_PORT" \
-   --set-string global.environment.LEVEL=2 \
-   --set service.port=$DRAGONCHAIN_UVN_NODE_PORT \
-   --set dragonchain.storage.spec.storageClassName="microk8s-hostpath" \
-   --set redis.storage.spec.storageClassName="microk8s-hostpath" \
-   --set redisearch.storage.spec.storageClassName="microk8s-hostpath""
-   ```
+sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain dragonchain/dragonchain-k8s \
+--set global.environment.DRAGONCHAIN_NAME="$DRAGONCHAIN_UVN_NODE_NAME" \
+--set global.environment.REGISTRATION_TOKEN="$DRAGONCHAIN_UVN_REGISTRATION_TOKEN" \
+--set global.environment.INTERNAL_ID="$DRAGONCHAIN_UVN_INTERNAL_ID" \
+--set global.environment.DRAGONCHAIN_ENDPOINT="$DRAGONCHAIN_UVN_ENDPOINT_URL:$DRAGONCHAIN_UVN_NODE_PORT" \
+--set-string global.environment.LEVEL=2 \
+--set service.port=$DRAGONCHAIN_UVN_NODE_PORT \
+--set dragonchain.storage.spec.storageClassName="microk8s-hostpath" \
+--set redis.storage.spec.storageClassName="microk8s-hostpath" \
+--set redisearch.storage.spec.storageClassName="microk8s-hostpath""
+```
 
-    then make the following changes:
-		1. Replace DRAGONCHAIN_HELM_CHART_VERSION with the latest chart version (NOT Dragonchain version)	
-		2. Replace “mydragonchain” with a real name (your choice)
-			- Recommend all lowercase letters, numbers, or dashes
-		3. Replace "YOURMATCHMAKINGTOKENFROMCONSOLE" with the correct value
-		4. Replace "YOURCHAINIDFROMCONSOLE" with the correct value
-		5. Replace "YOUR ENDPOINT URL" with your address (domain name, IP address) 
-			- **Don’t forget the http:// here!**
-			- Example: http://yourdomainname.com
-			- Example: http://12.34.56.78 (replace 12.34.56.78 with your ip address)		
-		6. CTRL + O to save, then Enter to confirm
-		7. CTRL + X to exit
+   then make the following changes:
+
+   1. Replace DRAGONCHAIN_HELM_CHART_VERSION with the latest chart version (NOT Dragonchain version)	
+   2. Replace “mydragonchain” with a real name (your choice)
+       - Recommend all lowercase letters, numbers, or dashes
+   3. Replace "YOURMATCHMAKINGTOKENFROMCONSOLE" with the correct value
+   4. Replace "YOURCHAINIDFROMCONSOLE" with the correct value
+   5. Replace "YOUR ENDPOINT URL" with your address (domain name, IP address)
+       - **Don’t forget the http:// here!**
+       - Example: http://yourdomainname.com
+       - Example: http://12.34.56.78 (replace 12.34.56.78 with your ip address)
+   6. CTRL + O to save, then Enter to confirm
+   7. CTRL + X to exit
 
 9. Make the install script executable:
 
