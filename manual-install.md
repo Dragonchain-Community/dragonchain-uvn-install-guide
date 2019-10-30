@@ -88,53 +88,67 @@ After connecting to your server with a program like Git Bash:
 
     ```chmod -x ./chainsecrets.sh```
 
+7. Add the dragonchain repo to helm:
 
-> Dragonchain Core Docs link for helm URLs:
->
-> https://dragonchain-core-docs.dragonchain.com/latest/deployment/links.html
+   ```helm repo add dragonchain https://dragonchain-charts.s3.amazonaws.com && helm repo update```
 
+8. Create a new script called "install_dragonchain.sh":
+   
+   ```nano install_dragonchain.sh```
 
-7. Download latest helm chart
+   then copy/paste the following:
 
-    ```wget http://replace-with-latest-helm-CHART-link-from-docs-above```
+   ```
+   # Arbitrary name for your node (recommend all lowercase letters/numbers/dashes, NO spaces)
+   DRAGONCHAIN_UVN_NODE_NAME="mydragonchain"
 
-8. Download latest helm config
+   # Your Matchmaking Token from the Dragonchain Console Website
+   DRAGONCHAIN_UVN_REGISTRATION_TOKEN="YOURMATCHMAKINGTOKENFROMCONSOLE"
 
-    ```wget http://replace-with-latest-helm-VALUES-link-from-docs```
+   # Your Chain ID from the Dragonchain Console Website
+   DRAGONCHAIN_UVN_INTERNAL_ID="YOURCHAINIDFROMCONSOLE"
 
-9. Edit the config file:
+   # Your Endpoint URL including http:// (or https:// if you know SSL has been configured)
+   DRAGONCHAIN_UVN_ENDPOINT_URL="YOUR ENDPOINT URL"
 
-    ```nano opensource-config.yaml```
-    
-	- Make the following changes in the opensource-config.yaml resource file:
-		1. Replace “ArbitraryName” with a real name (your choice)
-			- Recommend consistency and an all lowercase name (dashes are okay)
-			- DON'T include the letters "es" together in your name (don't ask)
-		2. Put your MATCHMAKING TOKEN in the quotes on the REGISTRATION_TOKEN line
-		3. Put your CHAIN ID in the quotes on the INTERNAL_ID line
-		4. Replace the address in DRAGONCHAIN_ENDPOINT with your address (domain name, IP address) and port that can be reached from the outside world
+   # The port to install on (30000 is default; only change if you know what you're doing)
+   DRAGONCHAIN_UVN_NODE_PORT="30000"
+
+   sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain dragonchain/dragonchain-k8s \
+   --set global.environment.DRAGONCHAIN_NAME="$DRAGONCHAIN_UVN_NODE_NAME" \
+   --set global.environment.REGISTRATION_TOKEN="$DRAGONCHAIN_UVN_REGISTRATION_TOKEN" \
+   --set global.environment.INTERNAL_ID="$DRAGONCHAIN_UVN_INTERNAL_ID" \
+   --set global.environment.DRAGONCHAIN_ENDPOINT="$DRAGONCHAIN_UVN_ENDPOINT_URL:$DRAGONCHAIN_UVN_NODE_PORT" \
+   --set-string global.environment.LEVEL=2 \
+   --set service.port=$DRAGONCHAIN_UVN_NODE_PORT \
+   --set dragonchain.storage.spec.storageClassName="microk8s-hostpath" \
+   --set redis.storage.spec.storageClassName="microk8s-hostpath" \
+   --set redisearch.storage.spec.storageClassName="microk8s-hostpath""
+   ```
+
+    then make the following changes:
+		1. Replace DRAGONCHAIN_HELM_CHART_VERSION with the latest chart version (NOT Dragonchain version)	
+		2. Replace “mydragonchain” with a real name (your choice)
+			- Recommend all lowercase letters, numbers, or dashes
+		3. Replace "YOURMATCHMAKINGTOKENFROMCONSOLE" with the correct value
+		4. Replace "YOURCHAINIDFROMCONSOLE" with the correct value
+		5. Replace "YOUR ENDPOINT URL" with your address (domain name, IP address) 
 			- **Don’t forget the http:// here!**
-			- Example: http://yourdomainname.com:30000
-			- Example: http://12.34.56.78:30000 (replace 12.34.56.78 with your ip address)
-		5. Change LEVEL to “2”
-		6. In the **service:** section, change "port: 30000" to the correct port number (if different)
-		7. In the **dragonchain:** section:
-			- Change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-			- Change "version: latest" to "version: 4.0.0" (or whatever the latest version of DC is)
-		8. In the **redis:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-		9. In the **redisearch:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-		10. CTRL + O to save, then Enter to confirm
-		11. CTRL + X to exit
+			- Example: http://yourdomainname.com
+			- Example: http://12.34.56.78 (replace 12.34.56.78 with your ip address)		
+		6. CTRL + O to save, then Enter to confirm
+		7. CTRL + X to exit
 
+9. Make the install script executable:
+
+   ```chmod u+x ./install_dragonchain.sh```
 
 #### Let’s install dragonchain!
 
 
-10. Run the installation command:
+10. Run the installation command:    
 
-    *Replace **my-dragonchain** with a name you like (lowercase & dashes only; remember consistency...; and **DON'T** include the letters "es" in your name) in the following command if you wish*
-
-    ```sudo helm upgrade --install my-dragonchain dragonchain-k8s-1.0.0.tgz --values opensource-config.yaml --namespace dragonchain```
+    ```sudo ./install_dragonchain.sh```
 
 12. Check the status of the pod installations
 
@@ -173,7 +187,6 @@ After connecting to your server with a program like Git Bash:
 
 If you get stuck (status never goes all 1/1s and "running," etc.), try running the following commands, then starting over at **Step 4** in this guide:
 
-
 ```sudo microk8s.reset```
 
 ```sudo microk8s.enable dns storage helm```
@@ -182,7 +195,7 @@ If you get stuck (status never goes all 1/1s and "running," etc.), try running t
     
 *WAIT 30 SECONDS*
     
-```sudo microk8s.enable registry ingress fluentd```
+```sudo microk8s.enable registry```
 
 If you still have trouble after that, check in on Telegram or the developer's Slack. 
 
