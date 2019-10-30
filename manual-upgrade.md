@@ -2,62 +2,21 @@
 
 This guide is for manually upgrading a **running** Dragonchain node. After connecting to your server with a program like Git Bash:
 
-1. Force microk8s back to the correct version: 
+*Note: this guide assumes you followed the updated manual installation process to begin with. If you do not currently have a file named "install_dragonchain.sh" in your setup folder, please follow Step 8 under ["Manual Installation"](https://github.com/Dragonchain-Community/dragonchain-uvn-install-guide/blob/master/manual-install.md#manual-installation---dragonchain-installation) then continue here.
 
-	```sudo snap refresh microk8s --channel=1.15/stable --classic``` 
+1. Change to the setup directory
 
-2. Create a new clean setup directory for the manual upgrade:
+   ```cd ~/setup```
+   
+2. Update the helm repo to get the latest Dragonchain chart version
 
-	```mkdir upgrade-4.0 && cd upgrade-4.0```
+   ```sudo helm repo add dragonchain https://dragonchain-charts.s3.amazonaws.com && sudo helm repo update```
+   
+3. Run the install script again (it will automatically upgrade if a previous installation exists)
 
-> Dragonchain Core Docs link for helm URLs:
->
-> https://dragonchain-core-docs.dragonchain.com/latest/deployment/links.html
+   ```sudo ./install_dragonchain.sh```
 
-
-3. Download latest helm chart
-
-    ```wget http://replace-with-latest-helm-CHART-link-from-docs-above```
-
-4. Download latest helm config
-
-    ```wget http://replace-with-latest-helm-VALUES-link-from-docs```
-
-5. Edit the config file:
-
-    ```nano opensource-config.yaml```
-    
-	- Make the following changes in the opensource-config.yaml resource file:
-		1. Replace “ArbitraryName” with a real name (your choice)
-			- Recommend consistency and an all lowercase name (dashes are okay)
-			- DON'T include the letters "es" together in your name (don't ask)
-		2. Put your MATCHMAKING TOKEN in the quotes on the REGISTRATION_TOKEN line
-		3. Put your CHAIN ID in the quotes on the INTERNAL_ID line
-		4. Replace the address in DRAGONCHAIN_ENDPOINT with your address (domain name, IP address) and port that can be reached from the outside world
-			- **Don’t forget the http:// here!**
-			- Example: http://yourdomainname.com:30000
-			- Example: http://12.34.56.78:30000 (replace 12.34.56.78 with your ip address)
-		5. Change LEVEL to “2”
-		6. In the **service:** section, change "port: 30000" to the correct port number (if different)
-		7. In the **dragonchain:** section:
-			- Change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-			- Change "version: latest" to "version: 4.0.0" (or whatever the latest version of DC is)
-		8. In the **redis:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-		9. In the **redisearch:** section, change “storageClassName: standard” to “storageClassName: microk8s-hostpath”
-		10. CTRL + O to save, then Enter to confirm
-		11. CTRL + X to exit
-
-
-#### Let’s upgrade dragonchain!
-
-
-6. Run the installation command:
-
-    Replace **my-dragonchain** with the **name you listed when running the `sudo helm list` command** in the following. 
-
-    ```sudo helm upgrade --install my-dragonchain dragonchain-k8s-1.0.0.tgz --values opensource-config.yaml --namespace dragonchain```
-
-7. Check the status of the pod installations
+4. Check the status of the pod installations
 
     ```sudo kubectl get pods -n dragonchain```
     
@@ -65,14 +24,14 @@ This guide is for manually upgrading a **running** Dragonchain node. After conne
 		- This step may take several minutes (up to 30 minutes or more) depending on your server; be patient and keep checking with that command!
 		- If you see “error” or “crash” statuses, check with dev Slack or TG
 
-8. Get your PUBLIC chain ID and save for later (**if you don't already have it**)
+5. Get your PUBLIC chain ID and save for later (**if you don't already have it**)
 	- In the following command, replace <POD_NAME_HERE> with the full name of the pod that looks like “mychain-webserver-......” listed after running the previous status command:
 
     ```sudo kubectl exec -n dragonchain <POD_NAME_HERE> -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())"```
 
 	- Save the string of characters that’s spit out
 
-9. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
+6. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
 
     ```curl https://matchmaking.api.dragonchain.com/registration/verify/CHAIN_PUBLIC_ID```
     
