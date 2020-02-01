@@ -31,7 +31,7 @@ After connecting to your server with a program like Git Bash:
 
 6. Setup networking stuff (firewall rules)
 
-    ```sudo ufw --force enable && sudo ufw default allow routed && sudo ufw default allow outgoing && sudo ufw allow 22/tcp && sudo ufw allow 30000/tcp && sudo ufw allow in on cbr0 && sudo ufw allow out on cbr0```
+    ```sudo ufw --force enable && sudo ufw default allow routed && sudo ufw default allow outgoing && sudo ufw allow 22/tcp && sudo ufw allow 30000/tcp && sudo ufw allow in on cni0 && sudo ufw allow out on cni0```
 
 7. Enable microk8s modules
 
