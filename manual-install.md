@@ -21,13 +21,12 @@ After connecting to your server with a program like Git Bash:
 
 4. Install microk8s
 
-    ```sudo snap install microk8s --channel=1.17/stable --classic```
+    ```sudo snap install microk8s --channel=1.18/edge --classic```
 
 5. Alias the kubectl command (if you don’t have normal kubectl installed)
     - If you DO have kubectl already installed (shouldn’t if this is a clean Ubuntu installation), you’ll need to prefix ANY kubectl commands below with “microk8s”, so “microk8s.kubectl get pods -n dragonchain” for example. This should only matter if you already know what you’re doing.
 
     ```sudo snap alias microk8s.kubectl kubectl```
-	
 
 6. Setup networking stuff (firewall rules)
 
@@ -35,17 +34,13 @@ After connecting to your server with a program like Git Bash:
 
 7. Enable microk8s modules
 
-    ```sudo microk8s.enable dns storage```
+    ```sudo microk8s.enable dns storage helm3```
 
-8. Install helm
+8. Alias the helm command 
 
-    ```sudo curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && sudo bash get_helm.sh --version v3.0.3 && sudo rm get_helm.sh```
+    ```sudo snap alias microk8s.helm3 helm```
 
-9. Init helm
-
-    ```sudo helm init```
-
-10. Install the last microk8s modules
+9. Install the last microk8s modules
 
     ```sudo microk8s.enable registry```
 
