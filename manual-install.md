@@ -139,7 +139,7 @@ then make the following changes:
 
     ```sudo ./install_dragonchain.sh```
     
-    Copy the line that reads "Root HMAC key details: ...."!! You WILL want this later!
+    **Copy the line that reads "Root HMAC key details: ...."!! You WILL want this later!**
     
 11. Edit the installation script:
 
