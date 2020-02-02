@@ -131,36 +131,37 @@ then make the following changes:
 
 #### Let’s install dragonchain!
 
-9. Make the install script executable:
+7. Make the install script executable:
 
    ```chmod u+x ./install_dragonchain.sh```
 
-10. Run the installation command:    
+8. Run the installation command:    
 
     ```sudo ./install_dragonchain.sh```
     
     **Copy the line that reads "Root HMAC key details: ...."!! You WILL want this later!**
     
-11. Edit the installation script:
+9. Edit the installation script:
 
    1. `nano install_dragonchain.sh`
-   2. Commend out the lines indicated beginning with BASE_64_PRIVATE_KEY by adding a # at the beginning of each line
+   2. Comment out the lines indicated beginning with BASE_64_PRIVATE_KEY by adding a # at the beginning of each line
    3. CTRL + O, press Enter, then CTRL + X to exit
 
-12. Check the status of the pod installations using the command under **NOTES** in the output of the installation command above    
+10. Check the status of the pod installations using the command under **NOTES** in the output of the installation command above    
     
 	- Should see FOUR (4) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 4 pods
 		- This step may take several minutes depending on your server; be patient and keep checking with that command!
 		- If you see “error” or “crash” statuses, check with dev Slack or TG
 
-13. Get your PUBLIC chain ID and save for later
-  - In the following command, replace <POD_NAME_HERE> with the full name of the pod that looks like “mychain-webserver-......” listed after running the previous status command:
+11. Get your PUBLIC chain ID and save for later  
+    
+   - Replace POD_NAME with the pod name that contains "webserver" in the following command
 
-    ```sudo kubectl exec -n dragonchain <POD_NAME_HERE> -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())"```
+    ```$(sudo kubectl exec -n dragonchain POD_NAME -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())")```
 
-- Save the string of characters that’s spit out
+   - Save the string of characters that’s spit out
 
-13. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
+12. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
 
     ```curl https://matchmaking.api.dragonchain.com/registration/verify/CHAIN_PUBLIC_ID```
     
@@ -168,30 +169,8 @@ then make the following changes:
   
     ```{"success":"Dragon Net configuration is valid and chain is reachable. No issues found."}```
 
-14. In case you DIDN’T save your HMAC ID and Key earlier (or ever need to get it again), get your HMAC_ID and HMAC_KEY values from the chain secrets deployed earlier
-	
-  - Note: **DON’T** re-run the chainsecrets.sh script if you lost your id or key
-	- Replace [your-secret-name] with saved value from chainsecrets.sh earlier in the following:
-  
-    ```sudo kubectl get secret -n dragonchain [your-secret-name] -o json | jq -r .data.SecretString | base64 -d | jq```
-    
-	- Copy and save the value for hmac-id and hmac-key
+**At this point you should be up and running with your Dragonchain verification node on Dragon Net! Congratulations!**
 
-
-**At this point you should be up and running with your Level 2 Dragonchain node on Dragon Net! Congratulations!**
-
-If you get stuck (status never goes all 1/1s and "running," etc.), try running the following commands, then starting over at **Step 4** in this guide:
-
-```sudo microk8s.reset```
-
-```sudo microk8s.enable dns storage helm```
-
-```sudo helm init --history-max 200```
-    
-*WAIT 30 SECONDS*
-    
-```sudo microk8s.enable registry```
-
-If you still have trouble after that, check in on Telegram or the developer's Slack. 
+If you get stuck (status never goes all 1/1s and "running," etc.), check in on Telegram or the developer's Slack. 
 
 Happy noding!
