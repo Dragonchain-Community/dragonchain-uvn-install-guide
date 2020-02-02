@@ -17,6 +17,7 @@ In this course on the Dragonchain Academy, you'll be guided from start to finish
 -   [Launch a Ubuntu Server VPS on Linode](launch-a-vps-on-linode.md)
 -   [Installation Option #1: Automatic Installation](automatic-install.md)
 -   [Installation Option #2: Manual Installation](manual-install.md)
+-   [Installing Multiple Nodes on One VPS (Manually)](manual-install-additional-nodes.md)
 -   [Try the Dragonchain SDK](setup-dragonchain-sdk.md)
 
 #### If you need to UPGRADE an ALREADY RUNNING Dragonchain Level 2 Node
