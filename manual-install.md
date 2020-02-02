@@ -21,35 +21,26 @@ After connecting to your server with a program like Git Bash:
 
 4. Install microk8s
 
-    ```sudo snap install microk8s --channel=1.15/stable --classic```
+    ```sudo snap install microk8s --channel=1.18/edge --classic```
 
 5. Alias the kubectl command (if you don’t have normal kubectl installed)
     - If you DO have kubectl already installed (shouldn’t if this is a clean Ubuntu installation), you’ll need to prefix ANY kubectl commands below with “microk8s”, so “microk8s.kubectl get pods -n dragonchain” for example. This should only matter if you already know what you’re doing.
 
     ```sudo snap alias microk8s.kubectl kubectl```
-	
 
 6. Setup networking stuff (firewall rules)
 
-    ```sudo ufw --force enable && sudo ufw default allow routed && sudo ufw default allow outgoing && sudo ufw allow 22/tcp && sudo ufw allow 30000/tcp && sudo ufw allow in on cbr0 && sudo ufw allow out on cbr0```
+    ```sudo ufw --force enable && sudo ufw default allow routed && sudo ufw default allow outgoing && sudo ufw allow 22/tcp && sudo ufw allow 30000/tcp && sudo ufw allow in on cni0 && sudo ufw allow out on cni0```
 
 7. Enable microk8s modules
 
-    ```sudo microk8s.enable dns storage helm```
+    ```sudo microk8s.enable dns storage helm3```
 
-8. Install helm
+8. Alias the helm command 
 
-    ```sudo curl -LO https://git.io/get_helm.sh && sudo bash get_helm.sh --version v2.14.3 && sudo rm get_helm.sh```
+    ```sudo snap alias microk8s.helm3 helm```
 
-9. Init helm
-
-    ```sudo helm init --history-max 200```
-	
-  - If you get “tiller not found” error later, do the init again with upgrade, then wait a few minutes for it to do its thing:
-  
-      ```sudo helm init --history-max 200 --upgrade```
-
-10. Install the last microk8s modules
+9. Install the last microk8s modules
 
     ```sudo microk8s.enable registry```
 
@@ -60,39 +51,23 @@ After connecting to your server with a program like Git Bash:
 
     ```cd ~/ && mkdir setup && cd setup```
 
-2. Download the chain secrets template
+2. Download the node prep script
 
-    ```wget http://dragonchain-community.github.io/dragonchain-uvn-install-guide/resources/chainsecrets.sh```
+    ```wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-install-guide/update-multinode-helm3/resources/node-prep.sh```
 
-3. Edit the chain secrets script
+3. Enable execution on node prep script
 
-    ```nano chainsecrets.sh```
-  
-	- Paste chain secrets script from resources
-	- Replace INTERNAL_ID with Chain ID on Dragon Net section of Dragonchain console
-	- Copy and save the “d-chain_id-secrets” value (after replacing) for later
-	- Save with CTRL + O, then Enter to confirm
-	- Exit with CTRL + X
+    ```chmod +x ./node-prep.sh```
 
-4. Enable execution on chainsecrets script
+4. Execute the node-prep.sh script
 
-    ```chmod +x ./chainsecrets.sh```
+    ```sudo ./node-prep.sh```
 
-5. Execute the chainsecrets.sh script
+5. Remove execution ability on chainsecrets.sh (we don’t want to accidentally run again later)
 
-    ```sudo ./chainsecrets.sh```
-    
-	- Copy and save the line that reads “Root HMAC key details…” for later
+    ```chmod -x ./node-prep.sh```
 
-6. Remove execution ability on chainsecrets.sh (we don’t want to accidentally run again later)
-
-    ```chmod -x ./chainsecrets.sh```
-
-7. Add the dragonchain repo to helm:
-
-   ```sudo helm repo add dragonchain https://dragonchain-charts.s3.amazonaws.com && sudo helm repo update```
-
-8. Create a new script called "install_dragonchain.sh":
+6. Create a new script called "install_dragonchain.sh":
    
    ```nano install_dragonchain.sh```
 
@@ -102,11 +77,11 @@ After connecting to your server with a program like Git Bash:
 # Arbitrary name for your node (recommend all lowercase letters/numbers/dashes, NO spaces)
 DRAGONCHAIN_UVN_NODE_NAME="mydragonchain"
 
-# Your Matchmaking Token from the Dragonchain Console Website
-DRAGONCHAIN_UVN_REGISTRATION_TOKEN="YOURMATCHMAKINGTOKENFROMCONSOLE"
-
 # Your Chain ID from the Dragonchain Console Website
 DRAGONCHAIN_UVN_INTERNAL_ID="YOURCHAINIDFROMCONSOLE"
+
+# Your Matchmaking Token from the Dragonchain Console Website
+DRAGONCHAIN_UVN_REGISTRATION_TOKEN="YOURMATCHMAKINGTOKENFROMCONSOLE"
 
 # Your Endpoint URL including http:// (or https:// if you know SSL has been configured)
 DRAGONCHAIN_UVN_ENDPOINT_URL="YOUR ENDPOINT URL"
@@ -114,12 +89,24 @@ DRAGONCHAIN_UVN_ENDPOINT_URL="YOUR ENDPOINT URL"
 # The port to install on (30000 is default; only change if you know what you're doing)
 DRAGONCHAIN_UVN_NODE_PORT="30000"
 
+# The level of the verification node to install (note the requirements that must be met for level 3 or 4 nodes)
+DRAGONCHAIN_NODE_LEVEL="2"
+
+# ++++++++++++++++++ Comment out the next 6 lines after initial install: can then re-run the script to upgrade your node at anytime ++++++++++++++++++++++++
+BASE_64_PRIVATE_KEY=$(openssl ecparam -genkey -name secp256k1 | openssl ec -outform DER | tail -c +8 | head -c 32 | xxd -p -c 32 | xxd -r -p | base64)
+HMAC_ID=$(tr -dc 'A-Z' < /dev/urandom | fold -w 12 | head -n 1)
+HMAC_KEY=$(tr -dc 'A-Za-z0-9' < /dev/urandom | fold -w 43 | head -n 1)
+echo "Root HMAC key details: ID: $HMAC_ID | KEY: $HMAC_KEY"
+SECRETS_AS_JSON="{\"private-key\":\"$BASE_64_PRIVATE_KEY\",\"hmac-id\":\"$HMAC_ID\",\"hmac-key\":\"$HMAC_KEY\",\"registry-password\":\"\"}"
+kubectl create secret generic -n dragonchain "d-$DRAGONCHAIN_UVN_INTERNAL_ID-secrets" --from-literal=SecretString="$SECRETS_AS_JSON"
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain dragonchain/dragonchain-k8s \
 --set global.environment.DRAGONCHAIN_NAME="$DRAGONCHAIN_UVN_NODE_NAME" \
 --set global.environment.REGISTRATION_TOKEN="$DRAGONCHAIN_UVN_REGISTRATION_TOKEN" \
 --set global.environment.INTERNAL_ID="$DRAGONCHAIN_UVN_INTERNAL_ID" \
 --set global.environment.DRAGONCHAIN_ENDPOINT="$DRAGONCHAIN_UVN_ENDPOINT_URL:$DRAGONCHAIN_UVN_NODE_PORT" \
---set-string global.environment.LEVEL=2 \
+--set-string global.environment.LEVEL=$DRAGONCHAIN_NODE_LEVEL \
 --set service.port=$DRAGONCHAIN_UVN_NODE_PORT \
 --set dragonchain.storage.spec.storageClassName="microk8s-hostpath" \
 --set redis.storage.spec.storageClassName="microk8s-hostpath" \
@@ -128,44 +115,53 @@ sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain d
 
 then make the following changes:
 
-   1. Replace DRAGONCHAIN_HELM_CHART_VERSION with the latest chart version (NOT Dragonchain version)	
-   2. Replace “mydragonchain” with a real name (your choice)
+   1. Replace “mydragonchain” with a real name (your choice)
        - Recommend all lowercase letters, numbers, or dashes
+       - Example good names: l2-0 for the first L2 node you create, l2-1 for the second, etc.
+   2. Replace "YOURCHAINIDFROMCONSOLE" with the correct value
    3. Replace "YOURMATCHMAKINGTOKENFROMCONSOLE" with the correct value
-   4. Replace "YOURCHAINIDFROMCONSOLE" with the correct value
-   5. Replace "YOUR ENDPOINT URL" with your address (domain name, IP address)
+   4. Replace "YOUR ENDPOINT URL" with your address (domain name, IP address)
        - **Don’t forget the http:// here!**
        - Example: http://yourdomainname.com
        - Example: http://12.34.56.78 (replace 12.34.56.78 with your ip address)
-   6. CTRL + O to save, then Enter to confirm
-   7. CTRL + X to exit
+   5. If needed (installing multiple nodes, etc.), change the node PORT value
+   6. Check the node level value to ensure it matches the kind of node you're installing
+   7. CTRL + O to save, then Enter to confirm
+   8. CTRL + X to exit
 
 #### Let’s install dragonchain!
 
-9. Make the install script executable:
+7. Make the install script executable:
 
    ```chmod u+x ./install_dragonchain.sh```
 
-10. Run the installation command:    
+8. Run the installation command:    
 
     ```sudo ./install_dragonchain.sh```
-
-12. Check the status of the pod installations
-
-    ```sudo kubectl get pods -n dragonchain```
     
-	- Should see FIVE (5) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 5 pods
-		- This step may take several minutes (up to 30 minutes or more) depending on your server; be patient and keep checking with that command!
+    **Copy the line that reads "Root HMAC key details: ...."!! You WILL want this later!**
+    
+9. Edit the installation script:
+
+   1. `nano install_dragonchain.sh`
+   2. Comment out the lines indicated beginning with BASE_64_PRIVATE_KEY by adding a # at the beginning of each line
+   3. CTRL + O, press Enter, then CTRL + X to exit
+
+10. Check the status of the pod installations using the command under **NOTES** in the output of the installation command above    
+    
+	- Should see FOUR (4) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 4 pods
+		- This step may take several minutes depending on your server; be patient and keep checking with that command!
 		- If you see “error” or “crash” statuses, check with dev Slack or TG
 
-13. Get your PUBLIC chain ID and save for later
-  - In the following command, replace <POD_NAME_HERE> with the full name of the pod that looks like “mychain-webserver-......” listed after running the previous status command:
+11. Get your PUBLIC chain ID and save for later  
+    
+   - Replace POD_NAME with the pod name that contains "webserver" in the following command
+   
+   ```$(sudo kubectl exec -n dragonchain POD_NAME -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())")```
 
-    ```sudo kubectl exec -n dragonchain <POD_NAME_HERE> -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())"```
+   - Save the string of characters that’s spit out
 
-- Save the string of characters that’s spit out
-
-13. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
+12. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
 
     ```curl https://matchmaking.api.dragonchain.com/registration/verify/CHAIN_PUBLIC_ID```
     
@@ -173,30 +169,8 @@ then make the following changes:
   
     ```{"success":"Dragon Net configuration is valid and chain is reachable. No issues found."}```
 
-14. In case you DIDN’T save your HMAC ID and Key earlier (or ever need to get it again), get your HMAC_ID and HMAC_KEY values from the chain secrets deployed earlier
-	
-  - Note: **DON’T** re-run the chainsecrets.sh script if you lost your id or key
-	- Replace [your-secret-name] with saved value from chainsecrets.sh earlier in the following:
-  
-    ```sudo kubectl get secret -n dragonchain [your-secret-name] -o json | jq -r .data.SecretString | base64 -d | jq```
-    
-	- Copy and save the value for hmac-id and hmac-key
+**At this point you should be up and running with your Dragonchain verification node on Dragon Net! Congratulations!**
 
-
-**At this point you should be up and running with your Level 2 Dragonchain node on Dragon Net! Congratulations!**
-
-If you get stuck (status never goes all 1/1s and "running," etc.), try running the following commands, then starting over at **Step 4** in this guide:
-
-```sudo microk8s.reset```
-
-```sudo microk8s.enable dns storage helm```
-
-```sudo helm init --history-max 200```
-    
-*WAIT 30 SECONDS*
-    
-```sudo microk8s.enable registry```
-
-If you still have trouble after that, check in on Telegram or the developer's Slack. 
+If you get stuck (status never goes all 1/1s and "running," etc.), check in on Telegram or the developer's Slack. 
 
 Happy noding!
