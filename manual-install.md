@@ -53,7 +53,7 @@ After connecting to your server with a program like Git Bash:
 
 2. Download the node prep script
 
-    ```wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-install-guide/update-multinode-helm3/resources/node-prep.sh```
+    ```wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-install-guide/master/resources/node-prep.sh```
 
 3. Enable execution on node prep script
 
