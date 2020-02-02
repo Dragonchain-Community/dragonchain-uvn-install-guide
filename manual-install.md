@@ -157,17 +157,17 @@ then make the following changes:
     
    - Replace POD_NAME with the pod name that contains "webserver" in the following command
 
-    ```$(sudo kubectl exec -n dragonchain POD_NAME -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())")```
+    `$(sudo kubectl exec -n dragonchain POD_NAME -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())")`
 
    - Save the string of characters that’s spit out
 
 12. Check to see if you’ve successfully registered with Dragon Net (replace CHAIN_PUBLIC_ID with your public ID from the previous step)
 
-    ```curl https://matchmaking.api.dragonchain.com/registration/verify/CHAIN_PUBLIC_ID```
+    `curl https://matchmaking.api.dragonchain.com/registration/verify/CHAIN_PUBLIC_ID`
     
 	- Output should look something like this:
   
-    ```{"success":"Dragon Net configuration is valid and chain is reachable. No issues found."}```
+    `{"success":"Dragon Net configuration is valid and chain is reachable. No issues found."}`
 
 **At this point you should be up and running with your Dragonchain verification node on Dragon Net! Congratulations!**
 
