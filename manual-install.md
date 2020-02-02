@@ -63,7 +63,7 @@ After connecting to your server with a program like Git Bash:
 
     ```sudo ./node-prep.sh```
 
-5. Remove execution ability on chainsecrets.sh (we don’t want to accidentally run again later)
+5. Remove execution ability on node-prep.sh (we don’t want to accidentally run again later)
 
     ```chmod -x ./node-prep.sh```
 
