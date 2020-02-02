@@ -147,12 +147,10 @@ then make the following changes:
    2. Commend out the lines indicated beginning with BASE_64_PRIVATE_KEY by adding a # at the beginning of each line
    3. CTRL + O, press Enter, then CTRL + X to exit
 
-12. Check the status of the pod installations
-
-    ```sudo kubectl get pods -n dragonchain```
+12. Check the status of the pod installations using the command under **NOTES** in the output of the installation command above    
     
-	- Should see FIVE (5) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 5 pods
-		- This step may take several minutes (up to 30 minutes or more) depending on your server; be patient and keep checking with that command!
+	- Should see FOUR (4) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 4 pods
+		- This step may take several minutes depending on your server; be patient and keep checking with that command!
 		- If you see “error” or “crash” statuses, check with dev Slack or TG
 
 13. Get your PUBLIC chain ID and save for later
