@@ -17,7 +17,7 @@ After connecting to your server with a program like Git Bash:
 
 3. Ensure apt is updated and necessary packages are installed
 
-    ```sudo apt update && sudo apt upgrade -y && sudo apt install -y jq openssl xxd```
+    ```sudo apt update && sudo apt upgrade -y && sudo apt install -y jq openssl xxd snapd```
 
 4. Install microk8s
 
@@ -115,17 +115,17 @@ sudo helm upgrade --install $DRAGONCHAIN_UVN_NODE_NAME --namespace dragonchain d
 
 then make the following changes:
 
-   1. Replace “mydragonchain” with a real name (your choice)
-       - Recommend all lowercase letters, numbers, or dashes
+   1. Replace “mydragonchain” with a new name if desired (SEE NOTES BELOW)
+       - ONLY use lowercase letters, numbers, or dashes
        - Example good names: l2-0 for the first L2 node you create, l2-1 for the second, etc.
-   2. Replace "YOURCHAINIDFROMCONSOLE" with the correct value
-   3. Replace "YOURMATCHMAKINGTOKENFROMCONSOLE" with the correct value
+   2. Replace "YOURCHAINIDFROMCONSOLE" with the correct value from the console website
+   3. Replace "YOURMATCHMAKINGTOKENFROMCONSOLE" with the correct value from the console website
    4. Replace "YOUR ENDPOINT URL" with your address (domain name, IP address)
        - **Don’t forget the http:// here!**
        - Example: http://yourdomainname.com
        - Example: http://12.34.56.78 (replace 12.34.56.78 with your ip address)
    5. If needed (installing multiple nodes, etc.), change the node PORT value
-   6. Check the node level value to ensure it matches the kind of node you're installing
+   6. **Change the 2 in DRAGONCHAIN_NODE_LEVEL="2" if installing a level 3 or 4 node**
    7. CTRL + O to save, then Enter to confirm
    8. CTRL + X to exit
 
@@ -144,20 +144,30 @@ then make the following changes:
 9. Edit the installation script:
 
    1. `nano install_dragonchain.sh`
-   2. Comment out the lines indicated beginning with BASE_64_PRIVATE_KEY by adding a # at the beginning of each line
+   2. Comment out the **six lines** indicated beginning with BASE_64_PRIVATE_KEY by adding a # at the beginning of each line. The edited lines should like like the following after adding the comment indicator:
+   ```
+   #BASE_64_PRIVATE_KEY=$(openssl ecparam -genkey -name secp256k1 | openssl ec -outform DER | tail -c +8 | head -c 32 | xxd -p -c 32 | xxd -r -p | base64)
+   #HMAC_ID=$(tr -dc 'A-Z' < /dev/urandom | fold -w 12 | head -n 1)
+   #HMAC_KEY=$(tr -dc 'A-Za-z0-9' < /dev/urandom | fold -w 43 | head -n 1)
+   #echo "Root HMAC key details: ID: $HMAC_ID | KEY: $HMAC_KEY"
+   #SECRETS_AS_JSON="{\"private-key\":\"$BASE_64_PRIVATE_KEY\",\"hmac-id\":\"$HMAC_ID\",\"hmac-key\":\"$HMAC_KEY\",\"registry-password\":\"\"}"
+   #kubectl create secret generic -n dragonchain "d-$DRAGONCHAIN_UVN_INTERNAL_ID-secrets" --from-literal=SecretString="$SECRETS_AS_JSON"
+   ```
    3. CTRL + O, press Enter, then CTRL + X to exit
 
-10. Check the status of the pod installations using the command under **NOTES** in the output of the installation command above    
+10. Check the status of the pod installations using the following command 
+   
+      `sudo kubectl get pods -n dragonchain`
     
-	- Should see FOUR (4) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 4 pods
-		- This step may take several minutes depending on your server; be patient and keep checking with that command!
-		- If you see “error” or “crash” statuses, check with dev Slack or TG
+   - You should see FOUR (4) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 4 pods
+   - This step may take several minutes depending on your server; be patient and keep checking with that command!
+   - If you see “error” or “crash” statuses, check with dev Slack or TG
 
 11. Get your PUBLIC chain ID and save for later  
     
    - Replace POD_NAME with the pod name that contains "webserver" in the following command
    
-   ```$(sudo kubectl exec -n dragonchain POD_NAME -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())")```
+      ```sudo kubectl exec -n dragonchain POD_NAME -- python3 -c "from dragonchain.lib.keys import get_public_id; print(get_public_id())"```
 
    - Save the string of characters that’s spit out
 
