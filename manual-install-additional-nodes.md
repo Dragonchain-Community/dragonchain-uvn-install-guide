@@ -41,7 +41,7 @@ Other than that, everything should be fairly straightforward.
 
 If you ever need to delete one of your nodes (it crashes, etc.), you can use the following command to do so without affecting your other running nodes:
 
-`sudo helm delete --purge yournodename`
+`sudo helm uninstall yournodename --namespace dragonchain`
 
 You'll need to replace the "yournodename" with the actual name of the node to delete (so something like "l2-3" in my example).
 
