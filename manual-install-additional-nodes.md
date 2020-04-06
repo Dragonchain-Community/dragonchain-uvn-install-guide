@@ -35,6 +35,8 @@ Next, after installing your first node from start to finish, **you just need to 
 
 **Note:** at step 6, when creating your installation script, just add the number or name of the node to the filename to keep things organized. So in my case, assuming I use the node name pattern "l2-0, l2-1, l2-2", etc., my install script filenames will be "install_dragonchain_0.sh, install_dragonchain_1.sh, install_dragonchain_2.sh", etc.
 
+You'll also need to **use a different port number** for each node on your machine. You can just bump the number by one for each node, so something like 30000, 30001, 30002, etc.
+
 Other than that, everything should be fairly straightforward.
 
 ### How to Delete a Node 
