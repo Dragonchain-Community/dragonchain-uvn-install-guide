@@ -4,7 +4,7 @@
  
  2. Click "Create > Linode" once you’re able to get to your dashboard
  
- 3. Choose "Ubuntu 19.04" for the Distribution
+ 3. Choose "Ubuntu 18.04 LTS" for the Distribution
  
  4. Select a Region to deploy your VPS to
  
