@@ -15,7 +15,7 @@
     
 3. Download the automatic upgrade script
 
-    ```rm -f ./upgrade_dragonchain_uvn.sh && wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-installer/release-v2.0-dragon-4.1.0/upgrade_dragonchain_uvn.sh```
+    ```rm -f ./upgrade_dragonchain_uvn.sh && wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-installer/release-v3.2/upgrade_dragonchain_uvn.sh```
     
 4. Make the script "runnable"
 
