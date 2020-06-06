@@ -2,7 +2,7 @@
 
 This guide is for manually upgrading a **running** Dragonchain node. After connecting to your server with a program like Git Bash:
 
-*Note: this guide assumes you followed the updated manual installation process to begin with. If you do not currently have a file named "install_dragonchain.sh" in your setup folder, please follow Step 8 under ["Manual Installation"](https://github.com/Dragonchain-Community/dragonchain-uvn-install-guide/blob/master/manual-install.md#manual-installation---dragonchain-installation) then continue here.*
+*Note: this guide assumes you followed the updated manual installation process to begin with. If you do not currently have a file named "install_dragonchain.sh" in your setup folder, please follow Step 6 under ["Manual Installation"](https://github.com/Dragonchain-Community/dragonchain-uvn-install-guide/blob/master/manual-install.md#manual-installation---dragonchain-installation) then continue here.*
 
 1. Change to the setup directory
 
@@ -20,7 +20,7 @@ This guide is for manually upgrading a **running** Dragonchain node. After conne
 
     ```sudo kubectl get pods -n dragonchain```
     
-	- Should see FIVE (5) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 5 pods
+	- Should see FOUR (4) pods listed with "1/1" in the READY column and "running" in the STATUS column for all 5 pods
 		- This step may take several minutes (up to 30 minutes or more) depending on your server; be patient and keep checking with that command!
 		- If you see “error” or “crash” statuses, check with dev Slack or TG
 
