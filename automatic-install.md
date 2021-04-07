@@ -13,23 +13,8 @@
 2. Connect to your VPS or VM using Git Bash or your terminal
     - If following the Linode tutorial, copy and paste the "ssh root@..." command you saved from the Networking tab
     
-3. Download the automatic installation script (copy and paste the following command into Git Bash or your terminal)
-
-    ```rm -f ./install_dragonchain_uvn.sh && wget https://raw.githubusercontent.com/Dragonchain-Community/dragonchain-uvn-installer/release-v4.0/install_dragonchain_uvn.sh```
-    
-4. Make the script "runnable" (copy and paste the following command into Git Bash or your terminal)
-
-    ```chmod u+x ./install_dragonchain_uvn.sh```
-
-    *Note: This command will not output anything to the screen if it worked.*
-
-5. Run the installation script (copy and paste the following command into Git Bash or your terminal)
-
-    ``` sudo ./install_dragonchain_uvn.sh```
-    
-6. Follow the prompts to input the information gathered in step 1.
-
-7. Watch your Dragonchain node come alive!
+3. Follow the instructions in the dedicated repository for the installer here to be sure you're using the latest version:
+    https://github.com/Dragonchain-Community/dragonchain-uvn-installer/blob/master/README.md
 
 If you have any trouble with this installation process, join us on the Dragonchain telegram and ask for assistance. We'll be around and happy to help!
 
